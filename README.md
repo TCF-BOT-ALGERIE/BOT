@@ -10,7 +10,7 @@ I created this bot for appointment scheduling of TCF ALGERIA (for personal use o
 The appointment is a free right :) .
 
 ######################## Pour les agences #####################
-STP n'utilise pas mon programme
+STP n'utilise pas mon programme !) .
 
 ####################### For agencies ##########################
-Please, don't use my software
+Please, don't use my software !) .
