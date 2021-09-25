@@ -1,0 +1,5 @@
+How to build the exe ?
+Follow this steps
+pyinstaller -w -F events.py
+pyinstaller --onefile updater.py
+pyinstaller --onefile run.py
