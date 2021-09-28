@@ -2,9 +2,12 @@
 
 """Put all files in same directory"""
 
-"""N'oublie Jamais de modifier les configs avec ses propores configuration"""
+"""N'oublie Jamais de modifier le config.json avec son propre configuration"""
 
-"""Don't forget to change the configuration on the json file"""
+"""Don't forget to change the configuration on the config.json file"""
 
-lancer depuis bot.bat
-launch from bot.bat
+"""https://www.twilio.com/try-twilio""" Ouvre un compte
+"""copier se qui correspondant dans sms.json pour recevoir une notification quand les rendez-vous sont ouverts"""
+
+pour lancer clique sur bot.bat
+to launch click on bot.bat
