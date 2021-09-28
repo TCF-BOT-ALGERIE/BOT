@@ -1,0 +1,8 @@
+{
+  "__comment__": "AJOUTER TON COMPTE IF-ALGERIE",
+  "___comment___": "Vas Voir types.json et antenne.json",
+  "email": "ton email compte ifa",
+  "password": "ton mot de passe compte ifa",
+  "TCF_TYPE": "1",
+  "antenne": "Alger"
+}
