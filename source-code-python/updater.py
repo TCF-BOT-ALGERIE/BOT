@@ -4,15 +4,15 @@ from json import load
 from twilio.rest import Client
 
 
-print("#"*25)
+print("#"*40)
 print("""\nBot created by Amine :)\n\n\tmade with <3\n""")
 print('Make sure to add twilio auth to receive SMS Notify When Reservation are opened\n\n\t\tEnjoy :)\n')
-sleep(2)
+sleep(1)
 print('SVP Essaie de faire une reservation manuel aussi\n')
 print('Please try to make a manual reservation\n')
 print('Bon Courage\nGoodluck\n')
-print('#'*25)
-sleep(5)
+print('#'*40)
+sleep(1)
 
 with open('configs/sms.json', 'r', encoding='utf-8') as sms:
     twilio_config = load(sms)

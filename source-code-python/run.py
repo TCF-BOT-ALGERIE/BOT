@@ -33,20 +33,21 @@ def login(email: str):
         permission = requests.get("http://127.0.0.1:5000/not_full")
         if len(permission.json().get('uids')) != 0:
             uids = TCF()
-            try:
-                for uid in uids:
-                    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                    print(f'{now}\tAttempting reservation for uid {uid}')
-                    del now
-                    csrf = requests.get("http://127.0.0.1:5000/csrf").json().get('csrf')
-                    head = user_headers.copy()
-                    head['X-Requested-With'] = 'XMLHttpRequest'
-                    head['X-CSRF-TOKEN'] = csrf
-                    head['Referer'] = 'https://portail.if-algerie.com/exams'
-                    data = {'uid': uid, 'service_type': 'EX'}
+            for uid in uids:
+                now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                print(f'{now}\tAttempting reservation for uid {uid}')
+                del now
+                csrf = requests.get("http://127.0.0.1:5000/csrf").json().get('csrf')
+                head = user_headers.copy()
+                head['X-Requested-With'] = 'XMLHttpRequest'
+                head['X-CSRF-TOKEN'] = csrf
+                head['Referer'] = 'https://portail.if-algerie.com/exams'
+                data = {'uid': uid, 'service_type': 'EX'}
+                try:
                     req = s.post('https://portail.if-algerie.com/exams/getdays', headers=head,
-                                 data=data, cookies=user_cookies, timeout=35)
+                             data=data, cookies=user_cookies, timeout=35)
                     res = req.json()
+                    print(res)
                     if res['success']:
                         for i in range(len(res['dates'])):
                             time_shifts.append(res['dates'][i]['timeShift']['uid'])
@@ -76,15 +77,15 @@ def login(email: str):
                                 return True
                             else:
                                 print(_res)
-                                sleep(0.5)
-                    else:
-                        now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                        print(f"{now}\tFailure\t{res}")
-                        del now
-                        sleep(0.5)
+                                sleep(1.5)
+                except Exception:
+                    sleep(1.5)
+                else:
+                    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                    print(f"{now}\tFailure\t{res}")
+                    del now
+                    sleep(1.5)
 
-            except Exception:
-                sleep(0.5)
         else:
             now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             print(f"{now}\tReservation Closed\n")
