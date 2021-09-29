@@ -32,7 +32,7 @@ full = []
 
 cached_cookies = None
 cached_header = None
-
+csrf_tokens = []
 
 def login(email: str, password: str, tcf_type: str, antenne: str):
     global cached_header, cached_cookies
@@ -49,6 +49,7 @@ def login(email: str, password: str, tcf_type: str, antenne: str):
         if cached_header is None and cached_cookies is None:
             res_get = s.get(url, verify=False, timeout=35)
             csrf = re.findall(csrf_regex, res_get.text)[0]
+            csrf_tokens.append(csrf)
             header = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
                 "X-CSRF-TOKEN": csrf,
@@ -155,13 +156,17 @@ def main():
             return {"error": "type error"}
 
     @app.route('/csrf', methods=["GET"])
-    def csrf():
-        return {"csrf": csrf}
+    def csrf_token():
+        return {"csrf": csrf_tokens[0]}
 
     @app.route('/reset', methods=["GET"])
     def reset():
         not_full.clear()
         return {"message": "reset successfully"}
+
+    @app.route('/bot_kill', methods=["GET"])
+    def reset():
+        quit()
 
     app.run(threaded=True, port=5000)
 

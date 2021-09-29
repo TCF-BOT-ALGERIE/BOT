@@ -1,5 +1,5 @@
 import os
 
-os.system('pyinstaller -w -F events.py')
-os.system('pyinstaller --onefile updater.py')
-os.system('pyinstaller --onefile run.py')
+os.system(f'pyinstaller -w -F events.py')
+os.system(f'pyinstaller --onefile updater.py')
+os.system(f'pyinstaller --onefile run.py')
