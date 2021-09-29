@@ -165,7 +165,7 @@ def main():
         return {"message": "reset successfully"}
 
     @app.route('/bot_kill', methods=["GET"])
-    def reset():
+    def kill():
         quit()
 
     app.run(threaded=True, port=5000)
