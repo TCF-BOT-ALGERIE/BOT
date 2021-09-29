@@ -1,7 +1,7 @@
 {
   "__comment__" : "you can open free twilio account",
-  "account_sid": "twilio account sid",
-  "auth_token": "twilio auth token",
-  "twilio_account_number": "twilio number",
-  "your_number": "+21300000000"
+  "account_sid": "AC0846df3d3120318fa0b6b58f40c01e08",
+  "auth_token": "ab2728d10062cce714d82567b473ea2a",
+  "twilio_account_number": "+15155853653",
+  "your_number": "+213668320247"
 }
