@@ -27,7 +27,6 @@ password = account.get('password')
 tcy_type = types.get(account.get("TCF_TYPE"))
 antenne = antennes.get(account.get('antenne'))
 
-
 not_full = []
 full = []
 
@@ -154,6 +153,10 @@ def main():
             return jsonify(header=cached_header)
         except TypeError:
             return {"error": "type error"}
+
+    @app.route('/csrf', methods=["GET"])
+    def csrf():
+        return {"csrf": csrf}
 
     @app.route('/reset', methods=["GET"])
     def reset():
