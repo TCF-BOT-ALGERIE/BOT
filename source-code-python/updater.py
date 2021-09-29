@@ -3,15 +3,15 @@ from time import sleep
 from json import load
 from twilio.rest import Client
 
-logo = """Bot created by Amine :)\n\tmade with <3\n"""
 
-print(logo)
-del logo
-print('Make sure to add twilio auth to receive SMS Notify When Reservation are opened\n\t\tEnjoy :)\n')
+print("#"*25)
+print("""\nBot created by Amine :)\n\n\tmade with <3\n""")
+print('Make sure to add twilio auth to receive SMS Notify When Reservation are opened\n\n\t\tEnjoy :)\n')
 sleep(2)
 print('SVP Essaie de faire une reservation manuel aussi\n')
-print('\tPlease try to make a manual reservation\n')
+print('Please try to make a manual reservation\n')
 print('Bon Courage\nGoodluck\n')
+print('#'*25)
 sleep(5)
 
 with open('configs/sms.json', 'r', encoding='utf-8') as sms:
@@ -45,12 +45,12 @@ def updater():
                 break
             else:
                 print('Fetching eventz')
-                requests.get("http://127.0.0.1:5000/TCF", timeout=30)
-                sleep(10)
+                requests.get("http://127.0.0.1:5000/TCF", timeout=36)
+                sleep(1)
 
         except requests.ConnectionError:
             print("Please Start the server from events.py/.exe")
-            sleep(5)
+            sleep(1)
         except requests.ReadTimeout:
             print("Timeout")
 
@@ -66,14 +66,16 @@ def updater():
 
     except Exception:
         pass
-
+    sleep(3600)
+    requests.get('http://127.0.0.1:5000/reset')
     while True:
         try:
-            requests.get("http://127.0.0.1:5000/TCF", timeout=35)
+            requests.get("http://127.0.0.1:5000/TCF", timeout=36)
+            sleep(1)
         except requests.ConnectionError:
-            sleep(5)
+            sleep(1)
         except requests.ReadTimeout:
-            sleep(5)
+            sleep(1)
 
 
 if __name__ == "__main__":
