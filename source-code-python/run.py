@@ -66,11 +66,10 @@ def login(email: str):
                             print(f"Attempting a reservation for {email}", end='\n')
                             retry = 0
                             while retry != 5:
-                                retry += 1
                                 try:
                                     reserve = s.post("https://portail.if-algerie.com/exams/reserve", headers=head,
                                                      data=datareserve, cookies=user_cookies,
-                                                     timeout=35)
+                                                     timeout=36)
                                     _res = reserve.json()
                                     if _res['success']:
                                         now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -83,7 +82,7 @@ def login(email: str):
                                         print(_res)
                                         sleep(1.5)
                                 except Exception:
-                                    pass
+                                    retry += 1
                             del retry
                     else:
                         now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -98,7 +97,7 @@ def login(email: str):
             now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             print(f"{now}\tReservation Closed\n")
             del now
-            sleep(5)
+            sleep(1.5)
 
 
 if __name__ == "__main__":

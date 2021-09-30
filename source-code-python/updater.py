@@ -2,17 +2,17 @@ import requests
 from time import sleep
 from json import load
 from twilio.rest import Client
-
+from datetime import datetime
 
 print("#"*40)
 print("""\nBot created by Amine :)\n\n'''made with <3\n'''""")
 print('Make sure to add twilio auth to receive SMS Notify When Reservation are opened\n\n\t\tEnjoy :)\n')
-sleep(1)
+sleep(2)
 print('SVP Essaie de faire une reservation manuel aussi\n')
 print('Please try to make a manual reservation\n')
 print('Bon Courage\nGoodluck\n')
 print('#'*40)
-sleep(1)
+sleep(2)
 
 with open('configs/sms.json', 'r', encoding='utf-8') as sms:
     twilio_config = load(sms)
@@ -37,16 +37,22 @@ def SMS_NOTIFICATION():
 
 
 def updater():
+    if len(requests.get("http://127.0.0.1:5000/not_full", timeout=5).json().get('uids')) != 0:
+        requests.get("http://127.0.0.1:5000/reset")
     while True:
         try:
             r = requests.get("http://127.0.0.1:5000/not_full", timeout=5)
             if len(r.json().get('uids')) != 0:
-                print('Reservation opened')
+                now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                print(f'{now}\tReservation opened')
+                del now
                 break
             else:
-                print('Fetching eventz')
                 requests.get("http://127.0.0.1:5000/TCF", timeout=36)
-                sleep(1)
+                now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                print(f'{now}\tEvents Fetched')
+                del now
+                sleep(1.5)
 
         except requests.ConnectionError:
             print("Please Start the server from events.py/.exe")
@@ -54,7 +60,8 @@ def updater():
         except requests.ReadTimeout:
             print("Timeout")
 
-    print('No Need to update Reservation are open')
+    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    print(f'{now}\tNo Need to update Reservation are open')
     try:
         message = SMS_NOTIFICATION().messages.create(
                 body="\nDe Amine\nRendez Vous TCF Sont Ouverts",

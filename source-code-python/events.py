@@ -8,7 +8,7 @@ from flask import jsonify, Flask
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
+# app.config["DEBUG"] = True
 app.config["JSON_SORT_KEYS"] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
