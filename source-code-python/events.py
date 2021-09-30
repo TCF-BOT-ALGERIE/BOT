@@ -51,7 +51,8 @@ def login(email: str, password: str, tcf_type: str, antenne: str):
             csrf = re.findall(csrf_regex, res_get.text)[0]
             csrf_tokens.append(csrf)
             header = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                              "Chrome/92.0.4515.159 Safari/537.36",
                 "X-CSRF-TOKEN": csrf,
                 "Referer": "https://portail.if-algerie.com/login",
                 "X-Requested-With": "XMLHttpRequest"

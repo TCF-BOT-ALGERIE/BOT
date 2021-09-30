@@ -45,7 +45,7 @@ def login(email: str):
                 data = {'uid': uid, 'service_type': 'EX'}
                 try:
                     req = s.post('https://portail.if-algerie.com/exams/getdays', headers=head,
-                             data=data, cookies=user_cookies, timeout=35)
+                                 data=data, cookies=user_cookies, timeout=35)
                     res = req.json()
                     print(res)
                     if res['success']:
@@ -57,33 +57,41 @@ def login(email: str):
                             now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                             print(f'{now}\t{uid}\t{periods[i]}\t{time_shifts[i]}')
                             del now
-                            dataReserve = {
+                            datareserve = {
                                 'uid': uid,
                                 'motivation': "1",
                                 'timeshift': periods[i],
                                 'info': time_shifts[i]
                             }
                             print(f"Attempting a reservation for {email}", end='\n')
-                            reserve = s.post("https://portail.if-algerie.com/exams/reserve", headers=head,
-                                             data=dataReserve, cookies=user_cookies,
-                                             timeout=35)
-                            _res = reserve.json()
-                            if _res['success']:
-                                now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                                print(f'{now}\treservation placed {periods[i]}\t{time_shifts[i]}', end='\n')
-                                del now
-                                y = email + ' : Réservé' + '\n'
-                                file.write(y)
-                                return True
-                            else:
-                                print(_res)
-                                sleep(1.5)
+                            retry = 0
+                            while retry != 5:
+                                retry += 1
+                                try:
+                                    reserve = s.post("https://portail.if-algerie.com/exams/reserve", headers=head,
+                                                     data=datareserve, cookies=user_cookies,
+                                                     timeout=35)
+                                    _res = reserve.json()
+                                    if _res['success']:
+                                        now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                                        print(f'{now}\treservation placed {periods[i]}\t{time_shifts[i]}', end='\n')
+                                        del now
+                                        y = email + ' : Réservé' + '\n'
+                                        file.write(y)
+                                        return True
+                                    else:
+                                        print(_res)
+                                        sleep(1.5)
+                                except Exception:
+                                    pass
+                            del retry
+                    else:
+                        now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                        print(f"{now}\t{res}")
+                        del now
+                        sleep(1.5)
+
                 except Exception:
-                    sleep(1.5)
-                else:
-                    now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                    print(f"{now}\tFailure\t{res}")
-                    del now
                     sleep(1.5)
 
         else:

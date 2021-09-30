@@ -5,7 +5,7 @@ from twilio.rest import Client
 
 
 print("#"*40)
-print("""\nBot created by Amine :)\n\n\tmade with <3\n""")
+print("""\nBot created by Amine :)\n\n'''made with <3\n'''""")
 print('Make sure to add twilio auth to receive SMS Notify When Reservation are opened\n\n\t\tEnjoy :)\n')
 sleep(1)
 print('SVP Essaie de faire une reservation manuel aussi\n')
