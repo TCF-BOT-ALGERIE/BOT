@@ -1,0 +1,13 @@
+"""Mets tout les fichier dans un seul dossier"""
+
+"""Put all files in same directory"""
+
+"""N'oublie Jamais de modifier le config.json avec son propre configuration"""
+
+"""Don't forget to change the configuration on the config.json file"""
+
+"""https://www.twilio.com/try-twilio""" Ouvre un compte
+"""copier se qui correspondant dans sms.json pour recevoir une notification quand les rendez-vous sont ouverts"""
+
+pour lancer clique sur bot.bat
+to launch click on bot.bat
