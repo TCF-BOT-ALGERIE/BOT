@@ -162,7 +162,11 @@ def main():
 
     @app.route('/reset', methods=["GET"])
     def reset():
+        global cached_header, cached_cookies
         not_full.clear()
+        full.clear()
+        cached_cookies = None
+        cached_header = None
         return {"message": "reset successfully"}
 
     app.run(threaded=True, port=5000)

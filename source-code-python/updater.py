@@ -37,8 +37,7 @@ def SMS_NOTIFICATION():
 
 
 def updater():
-    if len(requests.get("http://127.0.0.1:5000/not_full", timeout=5).json().get('uids')) != 0:
-        requests.get("http://127.0.0.1:5000/reset")
+    requests.get("http://127.0.0.1:5000/reset")
     while True:
         try:
             r = requests.get("http://127.0.0.1:5000/not_full", timeout=5)
